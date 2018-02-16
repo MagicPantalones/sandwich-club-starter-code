@@ -87,6 +87,7 @@ public class DetailActivity extends AppCompatActivity {
             ingredientsTv.append("-" + ingredient + "\n");
             ingredientLineBreaks += 1;
         }
+        //Hides the "Also Known as" TextViews if the array returns empty
         if (akaArray.isEmpty()){
             akaTitleTv.setVisibility(View.INVISIBLE);
             akaTv.setVisibility(View.INVISIBLE);
@@ -96,6 +97,8 @@ public class DetailActivity extends AppCompatActivity {
                 akaLinebreaks += 1;
             }
         }
+
+        //Hides the "Place of Origin" TextViews if they're empty
         if (TextUtils.isEmpty(origin)){
             originTitleTv.setVisibility(View.INVISIBLE);
             originTv.setVisibility(View.INVISIBLE);
@@ -104,7 +107,14 @@ public class DetailActivity extends AppCompatActivity {
             akaLinebreaks += 1;
         }
         descriptionTv.setText(description);
+
+        /* Moves the constraint for the description title and text to the bottom of the "Also known as" TextView if
+         * the "Place of origin" and "Also known as" contains more lines than the "Ingredients" list.
+         */
         if (akaLinebreaks > ingredientLineBreaks){
+            /*The code under is based on the answer from Azizbekian on this issue:
+              https://stackoverflow.com/questions/45263159/constraintlayout-change-constraints-programmatically
+            */
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) descriptionTitleTv.getLayoutParams();
             params.topToBottom = R.id.also_known_tv;
         }
