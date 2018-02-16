@@ -83,29 +83,27 @@ public class DetailActivity extends AppCompatActivity {
         String description = sandwich.getDescription();
         int ingredientLineBreaks = 0;
         int akaLinebreaks = 0;
+
         for (String ingredient : ingredientsArray){
             ingredientsTv.append("-" + ingredient + "\n");
             ingredientLineBreaks += 1;
         }
         //Hides the "Also Known as" TextViews if the array returns empty
-        if (akaArray.isEmpty()){
-            akaTitleTv.setVisibility(View.INVISIBLE);
-            akaTv.setVisibility(View.INVISIBLE);
-        } else {
-            for (String aka : akaArray) {
+        akaTitleTv.setVisibility(akaArray.isEmpty() ? View.INVISIBLE : View.VISIBLE);
+        akaTv.setVisibility(akaArray.isEmpty() ? View.INVISIBLE : View.VISIBLE);
+
+        for (String aka : akaArray) {
                 akaTv.append(aka + "\n");
                 akaLinebreaks += 1;
-            }
         }
 
         //Hides the "Place of Origin" TextViews if they're empty
-        if (TextUtils.isEmpty(origin)){
-            originTitleTv.setVisibility(View.INVISIBLE);
-            originTv.setVisibility(View.INVISIBLE);
-        }else {
-            originTv.setText(origin);
-            akaLinebreaks += 1;
-        }
+        originTitleTv.setVisibility(TextUtils.isEmpty(origin) ? View.INVISIBLE : View.VISIBLE);
+        originTv.setVisibility(TextUtils.isEmpty(origin) ? View.INVISIBLE : View.VISIBLE);
+
+        originTv.setText(origin);
+        akaLinebreaks += 1;
+
         descriptionTv.setText(description);
 
         /* Moves the constraint for the description title and text to the bottom of the "Also known as" TextView if
