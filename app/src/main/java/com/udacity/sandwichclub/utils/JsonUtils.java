@@ -27,6 +27,10 @@ public class JsonUtils {
 
         String mainName;
 
+        // Got the idea to use an ArrayList from this StackOverflow question:
+        // https://stackoverflow.com/questions/29559443/how-to-parse-json-array-into-an-android-list
+        // used some insperation from the JSON Utility class in the Sunshine excersize 3.01
+
         ArrayList<String> alsoKnownAs = new ArrayList<>();
         String placeOfOrigin;
         String description;
